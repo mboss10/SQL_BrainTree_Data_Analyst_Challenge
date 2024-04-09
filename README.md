@@ -17,4 +17,8 @@ The file contains the list of countries: 252 rows, 2 columns `country_code` and 
 
 Full file is available here: [countries.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/countries.csv)
 
-
+### continents.csv
+#### Definition
+The file contains the list of continents: 7 rows, 2 columns `continent_code` and `continent_name`
+#### Preview
+![]()
