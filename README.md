@@ -45,7 +45,7 @@ Full file is available here: [continent_map.csv](https://github.com/mboss10/SQL_
 I am using my favorite SQL client [DBeaver](https://dbeaver.io). I have created a local SQLite database and imported each .csv file into a table.
 
 ### Question 1
-1.1 Data Integrity Checking & Cleanup <br><br>
+1.1 Data Integrity Checking & Cleanup <br>
 
 Alphabetically list all of the country codes in the continent_map table that appear more than once. Display any values where country_code is null as country_code = "FOO" and make this row appear first in the list, even though it should alphabetically sort to the middle. 
 Provide the results of this query as your answer. <br>
@@ -58,8 +58,8 @@ GROUP BY 1
 HAVING COUNT(1)>1
 ORDER BY cm.country_code 
 ```
-
-1.2
+<br>
+1.2 <br>
 For all countries that have multiple rows in the continent_map table, delete all multiple records leaving only the 1 record per country. The record that you keep should be the first one when sorted by the continent_code alphabetically ascending. Provide the query/ies and explanation of step(s) that you follow to delete these records.
 
 ```
