@@ -21,6 +21,6 @@ Full file is available here: [countries.csv](https://github.com/mboss10/SQL_Brai
 #### Definition
 The file contains the list of continents: 7 rows, 2 columns `continent_code` and `continent_name`
 #### Preview
-![continents.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continents.png | width="400")
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continents.png" width="400")
 
 Full file is available here: [continent.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continents.csv)
