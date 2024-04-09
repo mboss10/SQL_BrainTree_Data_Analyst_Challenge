@@ -31,4 +31,12 @@ The file contains the Growth Domestic Product per Capita for each country for ea
 #### Preview
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/per_capita.png" width="400">
 
-Full file is available here: [continent.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/per_capita.csv)
+Full file is available here: [per_capita.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/per_capita.csv)
+
+### continent_map.csv
+#### Definition
+The file contains the a mapping of countries and their respective continent: 251 rows, 2 columns `country_code` and `continent_code`
+#### Preview
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continent_map.png" width="400">
+
+Full file is available here: [continent_map.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continent_map.csv)
