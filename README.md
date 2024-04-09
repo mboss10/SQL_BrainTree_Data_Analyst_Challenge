@@ -24,3 +24,11 @@ The file contains the list of continents: 7 rows, 2 columns `continent_code` and
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continents.png" width="400">
 
 Full file is available here: [continent.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continents.csv)
+
+### per_capita.csv
+#### Definition
+The file contains the Growth Domestic Product per Capita for each country for each year from 2004 to 2012: 2079 rows, 3 columns `country_code` , `year` and `gdp_per_capita`
+#### Preview
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/per_capita.png" width="400">
+
+Full file is available here: [continent.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/per_capita.csv)
