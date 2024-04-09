@@ -89,3 +89,45 @@ insert into continent_map
  DROP TABLE t1;
  DROP TABLE t2;
 ```
+
+### Question 2
+List the countries ranked 10-12 in each continent by the percent of year-over-year growth descending from 2011 to 2012. <br><br>
+
+The percent of growth should be calculated as: ((2012 gdp - 2011 gdp) / 2011 gdp) <br><br>
+
+The list should include the columns: <br><br>
+* rank
+* continent_name
+* country_code
+* country_name
+* growth_percent
+
+```
+/* I first create a Common Table Expression (CTE) to isolate the GDP growth percent over the year 2011 and 2012 */
+with cte_2011_2012_growth AS (
+select *, LAG(pc.gdp_per_capita) OVER (partition by pc.country_code ORDER BY pc.year) AS gpp_previous_year,
+round((pc.gdp_per_capita - LAG(pc.gdp_per_capita) OVER (partition by pc.country_code ORDER BY pc.year))/(LAG(pc.gdp_per_capita) OVER (partition by pc.country_code ORDER BY pc.year))*100,2) as growth_percent
+from per_capita pc
+where pc.year in (2011,2012)
+)
+/* then I create a main CTE to rank the countries in each continent per descending growth percent */
+, cte_main AS (
+select 
+	RANK() OVER (PARTITION BY cm.continent_code ORDER BY cte.growth_percent DESC) as rank,
+	co.continent_name,
+	cte.country_code,
+	ct.country_name,
+	cte.growth_percent
+FROM 
+	cte_2011_2012_growth cte
+INNER JOIN 
+	continent_map cm on cte.country_code = cm.country_code
+INNER JOIN
+	continents co on cm.continent_code = co.continent_code
+INNER JOIN 
+	countries ct on ct.country_code = cm.country_code
+	)
+/* Finally I select all columns from my main CTE filtering on the ones ranked 10, 11 and 12 */
+SELECT * FROM cte_main ctm
+where rank in (10,11,12)
+```
