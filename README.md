@@ -40,3 +40,52 @@ The file contains the a mapping of countries and their respective continent: 251
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continent_map.png" width="400">
 
 Full file is available here: [continent_map.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continent_map.csv)
+
+## The challenge
+I am using my favorite SQL client [DBeaver](https://dbeaver.io). I have created a local SQLite database and imported each .csv file into a table.
+
+### Question 1
+1.1 Data Integrity Checking & Cleanup <br><br>
+
+Alphabetically list all of the country codes in the continent_map table that appear more than once. Display any values where country_code is null as country_code = "FOO" and make this row appear first in the list, even though it should alphabetically sort to the middle. 
+Provide the results of this query as your answer. <br>
+```
+SELECT 
+	COALESCE(cm.country_code, 'FOO') as country_code 
+FROM 
+	continent_map cm
+GROUP BY 1 
+HAVING COUNT(1)>1
+ORDER BY cm.country_code 
+```
+
+1.2
+For all countries that have multiple rows in the continent_map table, delete all multiple records leaving only the 1 record per country. The record that you keep should be the first one when sorted by the continent_code alphabetically ascending. Provide the query/ies and explanation of step(s) that you follow to delete these records.
+
+```
+-- Create a temporary table with a new column ID as a row_number on the table after order by contry_code, continent_code
+
+CREATE TABLE t1 AS
+	SELECT 
+		row_number() over (order by country_code, continent_code asc) as 'ID',
+		country_code,
+		continent_code
+	FROM 
+		continent_map 
+ 
+CREATE TABLE t2 AS Select MIN(ID) as ID from t1 group by country_code 
+ 
+/*Delete the rows that dont have a min ID number after group by country_code*/
+Delete From t1 where ID NOT IN(select ID from t2) ;
+
+/*Reset continent_map table*/
+Delete From continent_map;
+
+/*Refill continent_map from temp_table*/
+insert into continent_map
+  select country_code, continent_code from t1;
+ 
+ /*drop temporary tables*/
+ DROP TABLE t1;
+ DROP TABLE t2;
+```
