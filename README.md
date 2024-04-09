@@ -4,7 +4,7 @@ I am always up for a challenge, especially when it is data related, and even mor
 
 ## Context
 
-Alexander Connelly, shared in his [Github repository](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) what is/used to be a Data Analyst exercise given during interviews at Braintree. 
+Alexander Connelly, shared in his [Github repository](https://github.com/AlexanderConnelly/BrainTree_SQL_Coding_Challenge_Data_Analyst) what is/used to be a Data Analyst exercise given during interviews at Braintree. <br>
 It is composed of a series of 7 questions to answer using a dataset with continents, countries and GDP per capita data. Below, I will share my SQL code and comments to answer each question as best as I can.
 
 ## Dataset
