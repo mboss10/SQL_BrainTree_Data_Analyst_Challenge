@@ -13,5 +13,7 @@ Let's review each .csv file provided for that challenge.
 #### Definition
 The file contains the list of countries: 252 rows, 2 columns `country_code` and `country_name`
 #### Preview
-![countries.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/countries.png | width=100)
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/countries.png" width="100">
 Full file is available here: [countries.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/countries.csv)
+
+
