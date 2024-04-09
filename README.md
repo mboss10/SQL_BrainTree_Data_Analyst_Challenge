@@ -10,4 +10,7 @@ It is composed of a series of 7 questions to answer using a dataset with contine
 ## Dataset
 Let's review each .csv file provided for that challenge.
 ### countries.csv
+#### Definition
 The file contains the list of countries: 252 rows, 2 columns `country_code` and `country_name`
+#### Preview
+
