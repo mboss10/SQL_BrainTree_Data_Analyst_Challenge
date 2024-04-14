@@ -63,12 +63,12 @@ ORDER BY cm.country_code
 ```
 <br>
 
-#### Results
-<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q2-results.png" width="400">
+
 <br>
 1.2 <br>
 For all countries that have multiple rows in the continent_map table, delete all multiple records leaving only the 1 record per country. The record that you keep should be the first one when sorted by the continent_code alphabetically ascending. Provide the query/ies and explanation of step(s) that you follow to delete these records. <br>
 
+#### SQL code
 ```
 -- Create a temporary table with a new column ID as a row_number on the table after order by contry_code, continent_code
 
@@ -109,6 +109,8 @@ The list should include the columns: <br><br>
 * country_name
 * growth_percent
 
+#### SQL code
+
 ```
 /* I first create a Common Table Expression (CTE) to isolate the GDP growth percent over the year 2011 and 2012 */
 with cte_2011_2012_growth AS (
@@ -138,6 +140,10 @@ INNER JOIN
 SELECT * FROM cte_main ctm
 where rank in (10,11,12)
 ```
+
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q2-results.png" width="400">
+
 ### Question 3
 For the year 2012, create a 3 column, 1 row report showing the percent share of gdp_per_capita for the following regions:
 * Asia,
@@ -150,7 +156,7 @@ Your result should look something like: <br>
 | ------------- | ------------- | ------------- |
 | 25.0%  | 25.0%  | 50.0% |
 
-
+#### SQL code
 ```
 /* I start by creating a CTE to redefine the continent names using a CASE statement */
 WITH cte_redefine_map AS (
@@ -189,6 +195,9 @@ SELECT
 FROM 
 	cte_main cte
 ```
+
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q3-results.png" width="400">
 
 
 
