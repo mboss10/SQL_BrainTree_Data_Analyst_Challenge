@@ -132,3 +132,57 @@ INNER JOIN
 SELECT * FROM cte_main ctm
 where rank in (10,11,12)
 ```
+### Question 3
+For the year 2012, create a 3 column, 1 row report showing the percent share of gdp_per_capita for the following regions:
+* Asia,
+* Europe,
+* the Rest of the World.
+
+Your result should look something like: <br>
+
+| Asia | Europe | Rest of World |
+| ------------- | ------------- | ------------- |
+| 25.0%  | 25.0%  | 50.0% |
+
+
+```
+/* I start by creating a CTE to redefine the continent names using a CASE statement */
+WITH cte_redefine_map AS (
+SELECT
+	c.continent_name,
+	CASE c.continent_name 
+		WHEN 'Asia' THEN 'Asia'
+		WHEN 'Europe' THEN 'Europe'
+		ELSE 'Rest of World'
+	END as new_continent_name
+FROM
+	continents c 
+),
+/* then I am creating my main CTE that reuses the new continent CTE and windows functions to calculate 
+  the total by new continent, the total overall and the percentage per nnew contitnent definition */
+cte_main AS (SELECT 
+	DISTINCT crm.new_continent_name,
+	SUM(pc.gdp_per_capita) OVER (PARTITION BY crm.new_continent_name) AS SUM_BY_CONTINENT,
+	SUM(pc.gdp_per_capita) OVER () as total,
+	round((SUM(pc.gdp_per_capita) OVER (PARTITION BY crm.new_continent_name))/(SUM(pc.gdp_per_capita) OVER ())*100,2) as cont_perc
+FROM 
+	continent_map cm 
+INNER JOIN 
+	continents c on c.continent_code = cm.continent_code 
+INNER JOIN
+	per_capita pc on pc.country_code = cm.country_code 
+INNER JOIN 
+	cte_redefine_map crm on crm.continent_name = c.continent_name
+WHERE pc.year = 2012	
+)
+/* Lastly I simply select the percentage from the main CTE using a CASE statement to create one column per new continent definition */
+SELECT 
+	max(CASE cte.new_continent_name WHEN 'Asia' THEN cte.cont_perc END) AS Asia,
+	max(CASE cte.new_continent_name WHEN 'Europe' THEN cte.cont_perc END) AS Europe,
+	max(CASE cte.new_continent_name	WHEN 'Rest of World' THEN cte.cont_perc END) AS 'Rest of World'
+FROM 
+	cte_main cte
+```
+
+
+
