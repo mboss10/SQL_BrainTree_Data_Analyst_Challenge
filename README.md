@@ -42,7 +42,8 @@ The file contains the a mapping of countries and their respective continent: 251
 Full file is available here: [continent_map.csv](https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/continent_map.csv)
 
 ## The challenge
-I am using my favorite SQL client [DBeaver](https://dbeaver.io). I have created a local SQLite database and imported each .csv file into a table.
+I am using my favorite SQL client [DBeaver](https://dbeaver.io). I have created a local SQLite database and imported each .csv file into a table. <br><br>
+Below I am listing each question as they were given in the interview challenge, and underneath each I am providing a code block of the SQL queries I have written to solve the question, along with screenshot(s) of the results when relevant.
 
 ### Question 1
 1.1 Data Integrity Checking & Cleanup <br>
