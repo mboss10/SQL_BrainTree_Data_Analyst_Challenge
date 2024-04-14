@@ -199,5 +199,37 @@ FROM
 #### Results
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q3-results.png" width="400">
 
+### Question 4
+4a. What is the count of countries and sum of their related gdp_per_capita values for the year 2007 where the string 'an' (case insensitive) appears anywhere in the country name?
+<br><br>
+4b. Repeat question 4a, but this time make the query case sensitive.
 
+#### SQL code
+```
+-- 4a	
+ELECT 
+	COUNT(c.country_name) as "count of countries",
+	ROUND(SUM(pc.gdp_per_capita),2) as "sum of gdp per capita"
+FROM
+	countries c 
+INNER JOIN 
+	per_capita pc on c.country_code = pc.country_code 
+WHERE 
+	UPPER(c.country_name) like '%AN%' AND PC."year" = 2007
+
+	
+-- 4b
+SELECT 
+	COUNT(c.country_name) as "count of countries",
+	ROUND(SUM(pc.gdp_per_capita),2) as "sum of gdp per capita"
+FROM
+	countries c 
+INNER JOIN 
+	per_capita pc on c.country_code = pc.country_code 
+WHERE 
+	c.country_name LIKE '%an%' AND PC."year" = 2007
+```
+
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q4-results.png" width="400">
 
