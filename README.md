@@ -62,6 +62,7 @@ HAVING COUNT(1)>1
 ORDER BY cm.country_code 
 ```
 <br>
+
 #### Results
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q2-results.png" width="400">
 <br>
