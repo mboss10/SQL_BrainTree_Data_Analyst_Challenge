@@ -50,6 +50,8 @@ Below I am listing each question as they were given in the interview challenge, 
 
 Alphabetically list all of the country codes in the continent_map table that appear more than once. Display any values where country_code is null as country_code = "FOO" and make this row appear first in the list, even though it should alphabetically sort to the middle. 
 Provide the results of this query as your answer. <br>
+
+#### SQL code
 ```
 SELECT 
 	COALESCE(cm.country_code, 'FOO') as country_code 
@@ -59,6 +61,9 @@ GROUP BY 1
 HAVING COUNT(1)>1
 ORDER BY cm.country_code 
 ```
+<br>
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q2-results.png" width="400">
 <br>
 1.2 <br>
 For all countries that have multiple rows in the continent_map table, delete all multiple records leaving only the 1 record per country. The record that you keep should be the first one when sorted by the continent_code alphabetically ascending. Provide the query/ies and explanation of step(s) that you follow to delete these records. <br>
