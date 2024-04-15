@@ -354,4 +354,4 @@ group by
 ```
 
 #### Results
-<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q6-results.png" width="600">
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q6-results NEW.png" width="600">
