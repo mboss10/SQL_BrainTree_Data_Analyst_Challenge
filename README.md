@@ -344,7 +344,7 @@ SELECT
 	country_code,
 	country_name,
 	gdp_per_capita,
-	MIN(running_total)
+	ROUND(MIN(running_total),2) as running_total
 FROM 
 	cte_records
 WHERE
@@ -354,4 +354,4 @@ group by
 ```
 
 #### Results
-<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q6-results.png" width="400">
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q6-results.png" width="600">
