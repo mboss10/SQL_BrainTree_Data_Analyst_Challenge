@@ -234,7 +234,7 @@ WHERE
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q4-results.png" width="400">
 
 ### Question 5
-Find the sum of gpd_per_capita by year and the count of countries for each year that have non-null gdp_per_capita where (i) the year is before 2012 and (ii) the country has a null gdp_per_capita in 2012. 
+Find the sum of gpd_per_capita by year and the count of countries for each year that have non-null gdp_per_capita where (i) the year is before 2012 and (ii) the country has a null gdp_per_capita in 2012. <br>
 Your result should have the columns:
 * year
 * country_count
@@ -295,3 +295,63 @@ GROUP BY
 #### Results
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q5-results.png" width="400">
 
+### Question 6
+All in a single query, execute all of the steps below and provide the results as your final answer:
+1. create a single list of all per_capita records for year 2009 that includes columns:
+   - continent_name
+   - country_code
+   - country_name
+   - gdp_per_capita
+
+2. order this list by:
+   - continent_name ascending
+   - characters 2 through 4 (inclusive) of the country_name descending
+   
+3. create a running total of gdp_per_capita by continent_name
+
+4. return only the first record from the ordered list for which each continent's running total of gdp_per_capita meets or exceeds $70,000.00 with the following columns:
+   - continent_name
+   - country_code
+   - country_name
+   - gdp_per_capita
+   - running_total
+
+#### SQL code
+```
+ WITH cte_records AS (
+SELECT
+	c.continent_name,
+	c2.country_code,
+	c2.country_name,
+	pc.gdp_per_capita,
+	sum(pc.gdp_per_capita) OVER(PARTITION BY continent_name ORDER BY c.continent_name, SUBSTR(c2.country_name,2,3) DESC) as running_total
+FROM 
+	continent_map cm 
+INNER JOIN
+	continents c ON cm.continent_code = c.continent_code 
+INNER JOIN 	
+	countries c2 ON cm.country_code = c2.country_code 
+INNER JOIN 
+	per_capita pc on cm.country_code = pc.country_code 
+WHERE
+	pc."year" = 2009
+ORDER BY 
+	c.continent_name,
+	SUBSTR(c2.country_name,2,3) DESC
+)
+SELECT 
+	continent_name,
+	country_code,
+	country_name,
+	gdp_per_capita,
+	MIN(running_total)
+FROM 
+	cte_records
+WHERE
+	running_total > 70000
+group by 
+	continent_name
+```
+
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q6-results.png" width="400">
