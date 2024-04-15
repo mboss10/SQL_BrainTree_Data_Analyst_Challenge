@@ -355,3 +355,45 @@ group by
 
 #### Results
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q6-results NEW.png" width="600">
+
+### Question 7
+Find the country with the highest average gdp_per_capita for each continent for all years. Now compare your list to the following data set. Please describe any and all mistakes that you can find with the data set below. Include any code that you use to help detect these mistakes.
+<br><br>
+| rank | continent_name	| country_code | country_name |	avg_gdp_per_capita |
+| --- | --- | --- | --- | --- |
+| 1 | Africa | SYC | Seychelles | $11,348.66 |
+| 1 | Asia | KWT | Kuwait | $43,192.49 |
+| 1 | Europe | MCO | Monaco | $152,936.10 |
+| 1 | North America | BMU | Bermuda | $83,788.48 |
+| 1 | Oceania | AUS | Australia | $47,070.39 |
+| 1 | South America | CHL | Chile | $10,781.71 |
+
+#### SQL code
+```
+WITH cte_main as (
+SELECT 
+	RANK () over (PARTITION BY c.continent_name ORDER BY AVG(pc.gdp_per_capita) DESC) AS rank_country,
+	c.continent_name,
+	pc.country_code,
+	c2.country_name,
+	AVG(pc.gdp_per_capita)
+FROM
+	per_capita pc 
+INNER JOIN 
+	continent_map cm on pc.country_code = cm.country_code 
+INNER JOIN 
+	continents c on cm.continent_code = c.continent_code 
+INNER JOIN
+	countries c2 on pc.country_code = c2.country_code 
+GROUP BY 2,3
+)
+SELECT 
+	*
+FROM 
+	cte_main
+WHERE
+	rank_country = 1
+```
+
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q7-results.png" width="600">
