@@ -233,3 +233,65 @@ WHERE
 #### Results
 <img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q4-results.png" width="400">
 
+### Question 5
+Find the sum of gpd_per_capita by year and the count of countries for each year that have non-null gdp_per_capita where (i) the year is before 2012 and (ii) the country has a null gdp_per_capita in 2012. 
+Your result should have the columns:
+* year
+* country_count
+* total 
+
+#### SQL code
+```
+ /* I am building a CTE that list the details for countries that have a NULL gdp in 2012 */
+WITH cte_null_2012_gpd AS(
+SELECT 
+	pc.country_code,
+	year,
+	gdp_per_capita 
+FROM
+	per_capita pc 
+WHERE 
+	pc.year = 2012 AND pc.gdp_per_capita = ''	
+)
+/* using windows functions I am calculating the count of countries and their total gdp over each year */
+SELECT 
+	distinct pc."year",
+	count(pc.country_code) OVER (PARTITION BY pc.year) as country_count,
+	SUM(pc.gdp_per_capita)  OVER (PARTITION BY pc.year) as total
+FROM
+	per_capita pc 
+INNER JOIN
+	cte_null_2012_gpd cte on pc.country_code = cte.country_code
+/* the following where clause is to make sure we only consider years prior to 2012 AND we use rows with non null gdp*/
+WHERE
+	pc.year < 2012 and pc.gdp_per_capita <> ''
+
+
+/* I am conscious we can use classic aggregate functions with a group by on year instead of window functions, see below*/
+WITH cte_null_2012_gpd AS(
+SELECT 
+	pc.country_code,
+	year,
+	gdp_per_capita 
+FROM
+	per_capita pc 
+WHERE 
+	pc.year = 2012 AND pc.gdp_per_capita = ''	
+)
+SELECT 
+	distinct pc."year",
+	count(pc.country_code) as country_count,
+	SUM(pc.gdp_per_capita)  as total
+FROM
+	per_capita pc 
+INNER JOIN
+	cte_null_2012_gpd cte on pc.country_code = cte.country_code
+WHERE
+	pc.year < 2012 and pc.gdp_per_capita <> ''	
+GROUP BY 
+	pc.year
+```
+
+#### Results
+<img src="https://github.com/mboss10/SQL_BrainTree_Data_Analyst_Challenge/blob/main/Q5-results.png" width="400">
+
