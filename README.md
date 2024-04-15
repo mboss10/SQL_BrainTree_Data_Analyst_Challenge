@@ -376,7 +376,7 @@ SELECT
 	c.continent_name,
 	pc.country_code,
 	c2.country_name,
-	AVG(pc.gdp_per_capita)
+	ROUND(AVG(pc.gdp_per_capita),2) AS avg_gdp_per_capita
 FROM
 	per_capita pc 
 INNER JOIN 
